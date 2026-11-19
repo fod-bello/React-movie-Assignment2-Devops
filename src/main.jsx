@@ -1,0 +1,59 @@
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Navigate, Routes } from "react-router";
+import HomePage from "./pages/homePage";
+import UpcomingPage from "./pages/upcomingPage";
+import MoviePage from "./pages/movieDetailsPage";
+import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
+import MovieReviewPage from "./pages/movieReviewPage";
+import SiteHeader from "./components/siteHeader";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import MoviesContextProvider from "./contexts/moviesContext";
+import AddMovieReviewPage from './pages/addMovieReviewPage';
+import PopularPage from "./pages/popularPage";
+import TopRatedPage from "./pages/topRatedPage";
+import NowPlayingPage from "./pages/nowPlayingPage";
+import ActorDetailsPage from "./pages/actorDetailsPage";
+import PlaylistPage from "./pages/playlistPage";
+import "./index.css";
+
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 360000,
+      refetchInterval: 360000,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <SiteHeader />
+        <MoviesContextProvider>
+          <Routes>
+            <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+            <Route path="/movies/upcoming" element={<UpcomingPage />} />
+            <Route path="/reviews/:id" element={<MovieReviewPage />} />
+            <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+            <Route path="/movies/:id" element={<MoviePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/movies/popular" element={<PopularPage />} />
+            <Route path="/movies/top-rated" element={<TopRatedPage />} />
+            <Route path="/movies/now-playing"  element={<NowPlayingPage />}/>
+            <Route path="/actors/:id" element={<ActorDetailsPage />} />
+            <Route path="/movies/playlist" element={<PlaylistPage />} />
+          </Routes>
+        </MoviesContextProvider>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
+};
+
+const rootElement = createRoot(document.getElementById("root"));
+rootElement.render(<App />);

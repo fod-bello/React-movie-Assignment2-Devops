@@ -1,0 +1,66 @@
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #14141c;
+  color: #ffffff;
+}
+
+/* Main page layout */
+main {
+  min-height: 100vh;
+  background-color: #14141c;
+}
+
+/* Page headings */
+h1, h2, h3 {
+  color: #ffffff;
+}
+
+/* Movie cards */
+.MuiCard-root {
+  background-color: #22222e !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.MuiCard-root:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Card text */
+.MuiCard-root .MuiTypography-root {
+  color: #ffffff;
+}
+
+/* Filter panel */
+.MuiFormControl-root,
+.MuiTextField-root {
+  border-radius: 8px;
+}
+
+/* Links */
+a {
+  color: #bb86fc;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #d7b5ff;
+}
+
+/* Responsive spacing */
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
